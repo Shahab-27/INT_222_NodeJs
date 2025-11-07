@@ -1,8 +1,26 @@
-{
-  "name": "Shahab Fardeen",
-  "age": 45,
-  "contact": "123",
-  "city": "ABC",
-  "grade": "A+",
-  "address": "mau"
-}
+[
+  {
+    "name": "Shahab Fardeen",
+    "age": 45,
+    "contact": "123",
+    "city": "ABC",
+    "grade": 85,
+    "address": "mau"
+  },
+  {
+    "name": "a",
+    "age": 45,
+    "contact": "123",
+    "city": "ABC",
+    "grade": 75,
+    "address": "mau"
+  },
+  {
+    "name": "b",
+    "age": 45,
+    "contact": "123",
+    "city": "ABC",
+    "grade": 55,
+    "address": "mau"
+  }
+]

@@ -7,10 +7,9 @@ fs.readFile('student.json','utf8',(err,data)=>{
 
     let student = JSON.parse(data);
 
-    student.city = "ABC"
-    student.grade = "A+"
-    student.address = "mau"
-    student.age = 45
+    student.forEach(el => {
+        el.grade+=5
+    });
 
 
     fs.writeFile('student.json', JSON.stringify(student,null,2),  (err) => {
