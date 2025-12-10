@@ -1,0 +1,41 @@
+// 1. Authentication Middleware (check loggedin query parameter)
+const authMiddleware = (req, res, next) => {
+    if (req.query.loggedin === 'true') {
+        next();
+    } else {
+        res.status(403).send('Access Denied');
+    }
+};
+
+// 2. Authorization Middleware (check admin role)
+const adminMiddleware = (req, res, next) => {
+    if (req.user && req.user.role === 'admin') {
+        next();
+    } else {
+        res.status(401).send('Not Authorized');
+    }
+};
+
+// 3. Validation Middleware (check name and age in body)
+const validateMiddleware = (req, res, next) => {
+    if (req.body.name && req.body.age) {
+        next();
+    } else {
+        res.status(400).send('Invalid Request');
+    }
+};
+
+// 4. Error Handling Middleware
+const errorMiddleware = (err, req, res, next) => {
+    res.status(500).send('Something went wrong');
+};
+
+// 5. Timing Middleware (log request duration)
+const timingMiddleware = (req, res, next) => {
+    const startTime = Date.now();
+    res.on('finish', () => {
+        const duration = Date.now() - startTime;
+        console.log(`${req.method} ${req.path} - ${duration}ms`);
+    });
+    next();
+};
