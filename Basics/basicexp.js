@@ -7,12 +7,12 @@ const emitter = new EventEmitter();
 
 // emitter.emit('greet');
 
-// // example with a parameter
-// emitter.on('greetName', (name) => {
-//     console.log(`Good morning, ${name}!`);
-// });
+// example with a parameter
+emitter.on('greetName', (name) => {
+    console.log(`Good morning, ${name}!`);
+});
 
-// emitter.emit('greetName', 'Shahab');
+emitter.emit('greetName', 'Shahab');
 
 // const showMessage = () => console.log('Event Triggered');
 
@@ -22,13 +22,13 @@ const emitter = new EventEmitter();
 // emitter.removeListener('remove', showMessage);
 // emitter.emit('remove'); // No output
 
-emitter.once('start', () => {
-    console.log('This event runs only Once!');
-});
+// emitter.once('start', () => {
+//     console.log('This event runs only Once!');
+// });
 
-emitter.emit('start');
+// emitter.emit('start');
 
-emitter.emit('start');
+// emitter.emit('start');
 
 
 

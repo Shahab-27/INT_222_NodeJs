@@ -12,7 +12,7 @@ app.use(express.static(__dirname));
 
 // Serve index.html
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "chat.html"));
 });
 
 // Socket.io logic
@@ -31,6 +31,6 @@ io.on("connection", (socket) => {
 });
 
 // Start server
-server.listen(8001, () => {
+server.listen(3001, () => {
   console.log("Server started on port 8001");
 });

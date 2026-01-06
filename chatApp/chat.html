@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Simple Chat App</title>
@@ -8,70 +7,57 @@
 
 <body>
 
-    <h1>Simple Chat</h1>
+<h1>Simple Chat</h1>
 
-    <!-- Username Input -->
-    <input id="username" placeholder="Enter your name..." />
-    <button onclick="setUser()">Save Name</button>
+<input id="username" placeholder="Enter your name..." />
+<button onclick="setUser()">Save Name</button>
 
-    <br><br>
+<br><br>
 
-    <!-- Message Input -->
-    <input id="msg" placeholder="Type message..." />
-    <button onclick="sendMessage()">Send</button>
+<input id="msg" placeholder="Type message..." />
+<button onclick="sendMessage()">Send</button>
 
-    <ul id="messages"></ul>
+<ul id="messages"></ul>
 
-    <script src="/socket.io/socket.io.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 
-    <script>
-        const socket = io();
-        let user = "";
+<script>
+    const socket = io();
+    let user = "";
 
-        function setUser() {
-            user = document.getElementById("username").value.trim();
+    function setUser() {
+        user = document.getElementById("username").value.trim();
+        if (!user) {
+            alert("Please enter your name");
+            return;
+        }
+        alert("Username saved: " + user);
+    }
 
-            if (user === "") {
-                alert("Please enter your name");
-                return;
-            }
+    function sendMessage() {
+        const msg = document.getElementById("msg").value.trim();
 
-            alert("Username saved: " + user);
+        if (!user) {
+            alert("Please enter your username first!");
+            return;
         }
 
-        function sendMessage() {
-            const msg = document.getElementById("msg").value.trim();
+        if (!msg) return;
 
-            if (!user) {
-                alert("Please enter your username first!");
-                return;
-            }
-
-            if (msg === "") {
-                alert("Message cannot be empty!");
-                return;
-            }
-
-            // Send message to server
-            socket.emit("chatMessage", {
-                user: user,
-                text: msg
-            });
-
-            document.getElementById("msg").value = "";
-        }
-
-        // When message received from server
-        socket.on("chatMessage", (data) => {
-            const li = document.createElement("li");
-            li.innerHTML = `<strong>${data.user}:</strong> ${data.text}`;
-            document.getElementById("messages").appendChild(li);
-
-            // Auto scroll down
-            window.scrollTo(0, document.body.scrollHeight);
+        socket.emit("chatMessage", {
+            user,
+            text: msg
         });
-    </script>
+
+        document.getElementById("msg").value = "";
+    }
+
+    socket.on("chatMessage", (data) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${data.user}:</strong> ${data.text}`;
+        document.getElementById("messages").appendChild(li);
+    });
+</script>
 
 </body>
-
 </html>
